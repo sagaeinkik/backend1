@@ -1,0 +1,47 @@
+@use 'assets' as u;
+
+.wrapper .content {
+    border: 1px solid black;
+    width: 70%;
+    margin: auto;
+    padding: 1em;
+}
+
+nav {
+    background-color: #333;
+    padding: 1em 1em 0.4em 1em;
+
+    ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+
+        li {
+            list-style: none;
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+            i {
+                font-size: 2em;
+                margin: 0.3em 0.3em 0.1em 0.3em;
+                position: relative;
+                left: 40%;
+                transform: translateX(-50%);
+            }
+            span.prompt {
+                display: block;
+                opacity: 0;
+                font-size: 0.9em;
+                @include u.transition;
+            }
+
+            &:hover {
+                span.prompt {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
