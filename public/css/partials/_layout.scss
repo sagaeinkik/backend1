@@ -1,47 +1,81 @@
 @use 'assets' as u;
 
-.wrapper .content {
-    border: 1px solid black;
-    width: 70%;
-    margin: auto;
-    padding: 1em;
+.wrapper {
+    height: 100vh;
 }
 
 nav {
-    background-color: #333;
-    padding: 1em 1em 0.4em 1em;
+    background-color: #f6f6f6;
+    padding: 1em;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 
     ul {
         display: flex;
         width: 100%;
         justify-content: space-evenly;
+        margin-left: 1em;
 
         li {
             list-style: none;
 
             a {
-                color: white;
                 text-decoration: none;
+                @include u.transition;
             }
             i {
                 font-size: 2em;
-                margin: 0.3em 0.3em 0.1em 0.3em;
-                position: relative;
+                margin: 0.3em;
+                /* position: relative;
                 left: 40%;
-                transform: translateX(-50%);
+                transform: translateX(-50%); */
+                color: u.$burgundy;
             }
             span.prompt {
-                display: block;
+                /* display: block; */
+                position: relative;
+                bottom: 0.5em;
                 opacity: 0;
                 font-size: 0.9em;
+                color: u.$burgundy;
                 @include u.transition;
             }
 
             &:hover {
+                a {
+                    opacity: 1;
+                }
                 span.prompt {
                     opacity: 1;
                 }
             }
         }
+    }
+}
+
+.content {
+    width: 70%;
+    margin: auto;
+    padding: 1em;
+
+    .info {
+        margin-top: 1em;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 1em;
+        grid-template-areas: 'text bild';
+    }
+    img {
+        margin: auto;
+        width: 100%;
+        max-width: 800px;
+        grid-area: bild;
+    }
+    .infotext {
+        grid-area: text;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 1em;
     }
 }

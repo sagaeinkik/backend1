@@ -1,3 +1,4 @@
+@use 'assets';
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
@@ -7,10 +8,11 @@
 }
 
 body {
-    max-width: 2300px;
+    max-width: 2600px;
     margin: auto;
     width: 100%;
     overflow-x: hidden;
     font-family: Poppins, Arial, Helvetica, sans-serif;
     line-height: 1.6;
+    background-color: #ececec;
 }
