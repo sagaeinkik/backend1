@@ -1,0 +1,60 @@
+@media (max-width: 650px) {
+    nav ul {
+        margin-left: 0;
+    }
+    nav ul li span.prompt {
+        display: none;
+    }
+    .content {
+        padding: 0.3em;
+        width: 95%;
+        margin: auto;
+        .info {
+            margin-bottom: 1.5em;
+        }
+    }
+
+    div.courses {
+        flex-direction: column;
+
+        article {
+            width: 100%;
+            margin: 1em 0;
+        }
+    }
+    h1 {
+        font-size: 1.7em;
+    }
+    h1.headline {
+        margin: 0em;
+        margin-top: 1em;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 330px) {
+    form div.controls {
+        flex-direction: column;
+
+        input[type='submit'],
+        input[type='reset'] {
+            font-size: 0.9em;
+        }
+
+        input[type='reset'] {
+            margin-top: 1em;
+            background-color: #dcdcdc;
+        }
+    }
+
+    .content .info {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'text' 'bild';
+    }
+}
