@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om sidan</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/a891bda96a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i><span class="prompt">Startsida</span></a></li>
+                    <li><a href="/add"><i class="fa-solid fa-circle-plus"></i><span class="prompt">Lägg till
+                                kurs</span></a></li>
+                    <li><a href="/about" aria-current="page"><i class="fa-solid fa-code"></i><span class="prompt">Om
+                                sidan</span></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="content about">
+                <h1>Om sidan</h1>
+                <h2>Uppgiften</h2>
+                <p class="notopmargin">Den här webbplatsen skapades av Saga Einarsdotter Kikajon för kursen DT207G,
+                    Backendbaserad
+                    Webbutveckling, på Mittuniversitetet.</p>
+                <p>Uppgiften gick ut på att skapa en webbapplikation som är
+                    ansluten till en databas, så att en användare kan utföra CRUD-handlingar mot databasen. I praktiken
+                    innebär detta att man kan lägga till nya kurser, redigera befintliga kurser, och radera
+                    kurser. </p>
+                <h2>Utförande</h2>
+                <p class="notopmargin">För att lösa uppgiften har jag använt Express som ramverk, SQLite som
+                    databashanterare (med sqlite3),
+                    ejs som view engine, och Sass (scss) för stylingen.</p>
+                <p>Jag har använt mig av Nodemon under utvecklingen och jag lagrar portnumret i en .env-fil.</p>
+                <p>Jag har också utgått från videon i teori- och läsanvisningarna, utan vars hjälp jag hade varit
+                    mycket mer vilse.</p>
+                <h2>Mina tankar</h2>
+                <p class="notopmargin">Den här uppgiften har varit otroligt lärorik eftersom jag sedan dag 1 har undrat
+                    hur man länkar en
+                    hemsida med en databas och vad man egentligen gör med datan från ett formulär. Det var å ena sidan
+                    väldigt smidigt att läsa in befintliga kurser, å andra sidan väldigt förvirrande och kändes lite som
+                    att jag famlade runt mest.
+                </p>
+                <p>Något jag tyckte var svårt var att veta när jag exempelvis skulle använda metoden .all() över metoden
+                    .get() med min databas. Att få CSS-filen att ladda in har också varit lite lurigt, då sökvägen
+                    plötsligt inte har fungerat på en undersida trots att den fungerar på en annan i samma mapp.</p>
+                <p>Jag känner att jag skulle behöva experimentera vidare för att få full förståelse för exakt hur allt
+                    fungerar med express, men det har ändå varit en nyttig erfarenhet.</p>
+                <p>Särskilt efter att ha gjort en likadan uppgift i TypeScript; i jämförelse var detta mycket mindre
+                    frustrerande.
+                </p>
+            </div> <!-- Slut på content -->
+        </main>
+        <footer>
+            <p class="credits">Gjord av Saga Einarsdotter Kikajon för kursen DT207G, 2024</p>
+        </footer>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ const db = new sql.Database('./db/moment1.db');
 const port = process.env.PORT || 3000;
 const app = express();
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static('public/'));
 app.use(express.urlencoded({ extended: true }));
 
 //Routing för startsidan
@@ -38,28 +38,19 @@ app.post('/add', (req, res) => {
     let syllabus = req.body.syllabus;
     //Tomt error ifall ifall
     let error = '';
-    //Kontrollera att inte raderna är tomma innan de läggs till
-    if (coursecode !== '' && coursename !== '' && progression !== '' && syllabus !== '') {
-        //Enklare validering
-        if (syllabus.includes('http')) {
-            //Peta in i databasen om allt är bra
-            const stmt = db.prepare(
-                `INSERT INTO courses(code, name, progression, syllabus)VALUES(?, ?, ?, ?);`
-            );
-            stmt.run(coursecode, coursename, progression, syllabus);
-            stmt.finalize();
-            //Om allt går bra, omdirigera till startsida
-            res.redirect('/');
-        } else {
-            //annars, skriv errormeddelande
-            error = 'Du måste ange en giltig url';
-            res.render('add', {
-                error: error,
-            });
-        }
-        //Om ingen validering så skriv ut error
+    //Enklare validering
+    if (syllabus.includes('http')) {
+        //Peta in i databasen om allt är bra
+        const stmt = db.prepare(
+            `INSERT INTO courses(code, name, progression, syllabus)VALUES(?, ?, ?, ?);`
+        );
+        stmt.run(coursecode, coursename, progression, syllabus);
+        stmt.finalize();
+        //Om allt går bra, omdirigera till startsida
+        res.redirect('/');
     } else {
-        error = 'Du måste fylla i samtliga fält';
+        //annars, skriv errormeddelande
+        error = 'Du måste ange en giltig url komplett med http/https';
         res.render('add', {
             error: error,
         });
@@ -78,6 +69,65 @@ app.get('/delete/:id', (req, res) => {
         //Omdirigera
         res.redirect('/');
     });
+});
+
+//Redigera kurser: läs in kurs
+app.get('/edit/:id', (req, res) => {
+    //Hämta id på kursen
+    const id = req.params.id;
+    //Välj ut den
+    db.get('SELECT * FROM courses where id=?', id, (err, row) => {
+        if (err) {
+            console.error(err.message);
+        }
+        //Skicka kursen till edit-sidan
+        res.render('edit', {
+            row: row,
+            error: '',
+        });
+    });
+});
+
+//Uppdatera kurs
+app.post('/edit/:id', (req, res) => {
+    //Hämta id
+    const id = req.params.id;
+    //Lagra värdena
+    let coursecode = req.body.coursecode;
+    let coursename = req.body.coursename;
+    let progression = req.body.progression;
+    let syllabus = req.body.syllabus;
+    let error = '';
+
+    //Enklare validering
+    if (syllabus.includes('http')) {
+        //Peta in i databasen om allt är bra
+        const stmt = db.prepare(
+            `UPDATE courses
+                SET code=?, name=?, progression=?, syllabus=? WHERE id=?;`
+        );
+        stmt.run(coursecode, coursename, progression, syllabus, id);
+        stmt.finalize();
+        //Om allt går bra, omdirigera till startsida
+        res.redirect('/');
+    } else {
+        // annars, skriv errormeddelande och rendera edit.ejs med kursinfo och errormeddelandet
+        db.get('SELECT * FROM courses WHERE id=?', id, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+            error = 'Du måste ange en giltig URL komplett med http/https';
+            res.render('edit', {
+                error: error,
+                row: row,
+            });
+        });
+    }
+});
+
+//Om sidan
+app.get('/about', (req, res) => {
+    res.render('about');
 });
 
 //starta applikation på port

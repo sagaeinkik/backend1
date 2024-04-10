@@ -12,6 +12,16 @@ I uppgiftsbeskrivningen stod inte uttryckligen att man var tvungen att ha funkti
 
 För att lösa uppgiften har jag använt mig av SQLite som databashanterare genom sqlite3. Jag har valt att inte publicera webbplatsen på render denna gång.
 
-Jag har också använt ejs som view engine.
+Så, jag har använt mig av följande för att lösa uppgiften:
+
+-   Express som ramverk
+-   Express' egna parsing
+-   SQLite som databas
+-   EJS som View Engine
+-   Nodemon för utveckling
+-   Dotenv för att lagra port
+-   Drawio-extension i VSCode för ER-diagram
 
 ---
+
+Jag har inkluderat en fil för att skapa databasen och tabellen (install.js) och en fil för att börja om med tabellen (reset.js) om man skulle göra om själv.

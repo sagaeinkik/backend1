@@ -33,7 +33,9 @@
                 </div> <!-- Slut på info -->
                 <h2>I databasen</h2>
                 <div class="courses">
+                    <!-- Kolla om det finns nån kurs att visa -->
                     <% if(locals.rows.length> 0) { %>
+                        <!-- Isåfall, loopa igenom och skriv ut till skärmen -->
                         <% locals.rows.forEach((row)=> { %>
                             <article>
                                 <p class="mini-headline">Kurskod:</p>
@@ -51,9 +53,12 @@
                                 <p class="mini-headline">Kursplan</p>
                                 <a href="<%= row.syllabus %>" target="_blank">Länk <i
                                         class="fa-solid fa-up-right-from-square"></i></a>
+                                <!-- Länkar för att ändra eller radera -->
                                 <a href="/delete/<%= row.id %>" class="delete"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="/edit/<%= row.id %>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
                             </article>
                             <% }); %>
+                                <!-- Visa meddelande annars -->
                                 <% } else { %>
                                     <p>Det finns inga kurser att visa. Lägg till en ny!</p>
                                     <% }; %>

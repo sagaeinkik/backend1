@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ändra befintlig kurs</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Sökvägen är lite lurig. Den funkar ibland och ibland inte. -->
+    <script src="https://kit.fontawesome.com/a891bda96a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/" aria-current="page"><i class="fa-solid fa-house"></i><span
+                                class="prompt">Startsida</span></a></li>
+                    <li><a href="/add"><i class="fa-solid fa-circle-plus"></i><span class="prompt">Lägg till
+                                kurs</span></a></li>
+                    <li><a href="/about"><i class="fa-solid fa-code"></i><span class="prompt">Om sidan</span></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="content">
+                <a href="/" id="backbutton"><i class="fa-regular fa-circle-left"></i>Tillbaka</a>
+                <h1 class="headline">Ändra kurs</h1>
+                <form method="post">
+                    <!-- Kolla error -->
+                    <% if(error !=="" ) { %>
+                        <span class="error">
+                            <%= error %>
+                        </span>
+                        <% } %>
+                            <!-- Läs in värden -->
+                            <label for="coursecode">Kurskod</label>
+                            <input type="text" name="coursecode" id="coursecode" required value="<%= row.code %>">
+                            <label for="coursename">Kursnamn</label>
+                            <input type="text" name="coursename" id="coursename" required value="<%= row.name %>">
+                            <label for="progression">Progression</label>
+                            <select name="progression" id="progression" required>
+                                <option value="" disabled>Välj i listan</option>
+                                <!-- Select beroende på vad som är valt sen innan -->
+                                <% if(row.progression==="A" ) { %>
+                                    <option value="A" selected>A</option>
+                                    <option value="B">B</option>
+                                    <% } else { %>
+                                        <option value="A">A</option>
+                                        <option value="B" selected>B</option>
+                                        <% } %>
+                            </select>
+                            <label for="syllabus">Länk till kursplan</label>
+                            <input type="text" name="syllabus" id="syllabus" required value="<%= row.syllabus %>">
+                            <div class="controls">
+                                <!-- Byt namn på knapp -->
+                                <input type="submit" value="Ändra kurs">
+                            </div> <!-- Slut på controls -->
+                </form>
+            </div> <!-- Slut på content -->
+        </main>
+        <footer>
+            <p class="credits">Gjord av Saga Einarsdotter Kikajon för kursen DT207G, 2024</p>
+        </footer>
+    </div> <!-- Slut på wrapper -->
+</body>
+
+</html>

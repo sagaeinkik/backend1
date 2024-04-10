@@ -14,9 +14,9 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="/" aria-current="page"><i class="fa-solid fa-house"></i><span
-                                class="prompt">Startsida</span></a></li>
-                    <li><a href="/add"><i class="fa-solid fa-circle-plus"></i><span class="prompt">Lägg till
+                    <li><a href="/"><i class="fa-solid fa-house"></i><span class="prompt">Startsida</span></a></li>
+                    <li><a href="/add" aria-current="page"><i class="fa-solid fa-circle-plus"></i><span
+                                class="prompt">Lägg till
                                 kurs</span></a></li>
                     <li><a href="/about"><i class="fa-solid fa-code"></i><span class="prompt">Om sidan</span></a></li>
                 </ul>
@@ -26,6 +26,7 @@
             <div class="content">
                 <h1 class="headline">Lägg till en ny kurs</h1>
                 <form action="/add" method="post">
+                    <!-- Skriv ut error här -->
                     <% if(error !=="" ) { %>
                         <span class="error">
                             <%= error %>
@@ -50,6 +51,9 @@
                 </form>
             </div> <!-- Slut på content -->
         </main>
+        <footer>
+            <p class="credits">Gjord av Saga Einarsdotter Kikajon för kursen DT207G, 2024</p>
+        </footer>
     </div> <!-- Slut på wrapper -->
 </body>
 

@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
+//Variabler
 $blue: #cde0e2;
 $burgundy: #301021;
 $font: Poppins, Arial, Helvetica, sans-serif;
 
+//Mixin
 @mixin transition {
     transition: 0.4s ease;
     -webkit-transition: 0.4s ease;
