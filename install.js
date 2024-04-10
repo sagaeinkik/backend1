@@ -14,9 +14,7 @@ db.serialize(() => {
         code TEXT NOT NULL, 
         name TEXT NOT NULL, 
         progression TEXT,
-        syllabus TEXT, 
-        -- validera url 
-        CHECK (syllabus LIKE "http%://%") 
+        syllabus TEXT
     )`);
 });
 

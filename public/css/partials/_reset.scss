@@ -1,5 +1,4 @@
 @use 'assets';
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
     margin: 0;
@@ -12,7 +11,7 @@ body {
     margin: auto;
     width: 100%;
     overflow-x: hidden;
-    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-family: assets.$font;
     line-height: 1.6;
     background-color: #ececec;
 }

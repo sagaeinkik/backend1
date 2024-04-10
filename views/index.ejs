@@ -28,11 +28,41 @@
                     <img src="undraw_book.svg" alt="Illustration av kvinna med en bok">
                     <div class="infotext">
                         <h1>Befintliga kurser</h1>
-                        <p>Här kan du se dina kurser samlade på ett smidigt ställe.</p>
+                        <p>Här kan du se alla tillagda kurser. Samlade på ett smidigt ställe.</p>
                     </div> <!-- Slut på infotext -->
                 </div> <!-- Slut på info -->
+                <h2>I databasen</h2>
+                <div class="courses">
+                    <% if(locals.rows.length> 0) { %>
+                        <% locals.rows.forEach((row)=> { %>
+                            <article>
+                                <p class="mini-headline">Kurskod:</p>
+                                <p>
+                                    <%= row.code %>
+                                </p>
+                                <p class="mini-headline">Kursnamn:</p>
+                                <p>
+                                    <%= row.name %>
+                                </p>
+                                <p class="mini-headline">Progression:</p>
+                                <p>
+                                    <%= row.progression %>
+                                </p>
+                                <p class="mini-headline">Kursplan</p>
+                                <a href="<%= row.syllabus %>" target="_blank">Länk <i
+                                        class="fa-solid fa-up-right-from-square"></i></a>
+                                <a href="/delete/<%= row.id %>" class="delete"><i class="fa-solid fa-trash-can"></i></a>
+                            </article>
+                            <% }); %>
+                                <% } else { %>
+                                    <p>Det finns inga kurser att visa. Lägg till en ny!</p>
+                                    <% }; %>
+                </div>
             </div> <!-- Slut på content -->
         </main>
+        <footer>
+            <p class="credits">Gjord av Saga Einarsdotter Kikajon för kursen DT207G, 2024</p>
+        </footer>
     </div> <!-- Slut på wrapper -->
 </body>
 
