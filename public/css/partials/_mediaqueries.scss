@@ -1,3 +1,6 @@
+/* MEDIA QUERIES */
+
+//Brytpunkt 650px, justera hur kurserna visas
 @media (max-width: 650px) {
     nav ul {
         margin-left: 0;
@@ -22,6 +25,7 @@
             margin: 1em 0;
         }
     }
+    //Finjustera lite storlekar
     h1 {
         font-size: 1.7em;
     }
@@ -32,12 +36,13 @@
     h2 {
         font-size: 1.3em;
     }
-
+    //Bredda formulär
     form {
         width: 100%;
     }
 }
 
+//Brytpunkt 330px: fixa knapparna på formulär, gör om grid på startsida
 @media (max-width: 330px) {
     form div.controls {
         flex-direction: column;

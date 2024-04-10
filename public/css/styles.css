@@ -261,6 +261,7 @@ footer p.credits {
   margin: 2em;
 }
 
+/* MEDIA QUERIES */
 @media (max-width: 650px) {
   nav ul {
     margin-left: 0;
