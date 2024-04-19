@@ -38,22 +38,44 @@ app.post('/add', (req, res) => {
     let syllabus = req.body.syllabus;
     //Tomt error ifall ifall
     let error = '';
-    //Enklare validering
-    if (syllabus.includes('http')) {
-        //Peta in i databasen om allt är bra
+
+    /* VALIDERING */
+    //Error-objekt
+    const errorMessage = {
+        codeError: 'Du måste ange kurskod!',
+        nameError: 'Du måste ange kursnamn!',
+        progError: 'Du måste ange progression A eller B!',
+        syllEmpty: 'Du måste ange länk till kursplan!',
+        syllError: 'Du måste ange giltig url med http/https!',
+    };
+
+    //Kontroller som tilldelar error värde baserat på fälten
+    if (!coursecode) {
+        error = errorMessage.codeError;
+    } else if (!coursename) {
+        error = errorMessage.nameError;
+    } else if (!progression) {
+        error = errorMessage.progError;
+    } else if (!progression === 'A' || !progression === 'B') {
+        error = errorMessage.progError;
+    } else if (!syllabus) {
+        error = errorMessage.syllEmpty;
+    } else if (!syllabus.includes('http')) {
+        error = errorMessage.syllError;
+    }
+
+    //Om error finns, rendera om sidan med felmeddelande
+    if (error) {
+        res.render('add', { error: error });
+    } else {
+        //Om validering godkänd, lägg till i databas
         const stmt = db.prepare(
-            `INSERT INTO courses(code, name, progression, syllabus)VALUES(?, ?, ?, ?);`
+            `INSERT INTO courses(code, name, progression, syllabus) VALUES (?, ?, ?, ?);`
         );
         stmt.run(coursecode, coursename, progression, syllabus);
         stmt.finalize();
-        //Om allt går bra, omdirigera till startsida
+        //Omdirigera till start
         res.redirect('/');
-    } else {
-        //annars, skriv errormeddelande
-        error = 'Du måste ange en giltig url komplett med http/https';
-        res.render('add', {
-            error: error,
-        });
     }
 });
 
@@ -99,29 +121,48 @@ app.post('/edit/:id', (req, res) => {
     let syllabus = req.body.syllabus;
     let error = '';
 
-    //Enklare validering
-    if (syllabus.includes('http')) {
-        //Peta in i databasen om allt är bra
+    /* VALIDERING */
+    //Error-objekt
+    const errorMessage = {
+        codeError: 'Du måste ange kurskod!',
+        nameError: 'Du måste ange kursnamn!',
+        progError: 'Du måste ange progression A eller B!',
+        syllEmpty: 'Du måste ange länk till kursplan!',
+        syllError: 'Du måste ange giltig url med http/https!',
+    };
+
+    //Kontroller som tilldelar error värde baserat på fälten
+    if (!coursecode) {
+        error = errorMessage.codeError;
+    } else if (!coursename) {
+        error = errorMessage.nameError;
+    } else if (!progression) {
+        error = errorMessage.progError;
+    } else if (!progression === 'A' || !progression === 'B') {
+        error = errorMessage.progError;
+    } else if (!syllabus) {
+        error = errorMessage.syllEmpty;
+    } else if (!syllabus.includes('http')) {
+        error = errorMessage.syllError;
+    }
+
+    //Om error finns, rendera om sidan med felmeddelande
+    if (error) {
+        db.get(`SELECT * FROM courses WHERE id=?`, id, (err, row) => {
+            if (err) {
+                console.log(err.message);
+            }
+            res.render('edit', { error: error, row: row });
+        });
+    } else {
+        //Om validering godkänd, uppdatera databas
         const stmt = db.prepare(
-            `UPDATE courses
-                SET code=?, name=?, progression=?, syllabus=? WHERE id=?;`
+            `UPDATE courses SET code=?, name=?, progression=?, syllabus=? WHERE id=?;`
         );
         stmt.run(coursecode, coursename, progression, syllabus, id);
         stmt.finalize();
-        //Om allt går bra, omdirigera till startsida
+        //Omdirigera till start
         res.redirect('/');
-    } else {
-        // annars, skriv errormeddelande och rendera edit.ejs med kursinfo och errormeddelandet
-        db.get('SELECT * FROM courses WHERE id=?', id, (err, row) => {
-            if (err) {
-                console.error(err.message);
-            }
-            error = 'Du måste ange en giltig URL komplett med http/https';
-            res.render('edit', {
-                error: error,
-                row: row,
-            });
-        });
     }
 });
 
